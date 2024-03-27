@@ -106,5 +106,57 @@ namespace Komprese
             Console.WriteLine();
         }
     }
+
+    
+        
+        
+        public List<int> PaletaBarevObrazku(){
+            List<int>unikatniBarvy =  new List<int>();
+            for (int j = 0; j < obrazek.GetLength(1); j++)
+           {
+            for (int i = 0; i < obrazek.GetLength(0); i++)
+            {
+                    if(!unikatniBarvy.Contains(obrazek[i,j])){
+                    unikatniBarvy.Add(obrazek[i, j]);
+                    }
+            }
+         }
+         return unikatniBarvy;
+        }
+
+        public void spocitatPix(){
+            List<int>unikatniBarvy = PaletaBarevObrazku();
+            int[,] array = new int [2,unikatniBarvy.Count];
+            int pocitadlo= 0;
+
+                    foreach (int item in unikatniBarvy)
+                    {
+                        array[0,pocitadlo] = item; 
+                        pocitadlo++;
+                    }
+                    
+            for(int k = 0; k < unikatniBarvy.Count(); k++){
+
+                for (int j = 0; j < obrazek.GetLength(1); j++)
+                {
+                    for (int i = 0; i < obrazek.GetLength(0); i++)
+                    {
+                            if( unikatniBarvy[k] == obrazek[i,j]){
+                                array[1,k] ++;
+                            }
+
+                    }
+                }
+            }
+
+            for (int j = 0; j < array.GetLength(1); j++)
+        {
+            for (int i = 0; i < array.GetLength(0); i++)
+            {
+                Console.Write(array[i, j] + ", ");
+            }
+            Console.WriteLine();
+        }
+        }
   }  
 }
